@@ -18,4 +18,5 @@ Fork/Join的标准范式如下：
 
 3.package tools
 ----
-并发工具中的CountDownLawn,可以等待一个线程完全结束后再执行其它线程，加强版的join(),代码内容是先运行启动Spring全家桶的线程，再执行mysql线程，然后是主线程后再执行业务代码，定义CountDownLawn时要初始化count，需要先执行的线程执行后调用latch.countDown(),使count-1，当count=0时才可以执行await(),否则将一直等待。
+(1)并发工具中的CountDownLatch,可以等待一个线程完全结束后再执行其它线程，加强版的join(),代码内容是先运行启动Spring全家桶的线程，再执行mysql线程，然后是主线程后再执行业务代码，定义CountDownLatch时要初始化count，需要先执行的线程执行后调用latch.countDown(),使count-1，当count=0时才可以执行await(),否则将一直等待。<br>
+(2)并发工具中的CyclicBarrier,指的是屏障阻塞了一组线程，需要等待所有的线程到达后才能继续执行，与CountDownLatch的区别是CountDownLatch的放行是由第三者控制的，CyclicBarrier放行是由一组线程本身控制的，前者放行条件>=线程数，后者放行条件=线程数。
