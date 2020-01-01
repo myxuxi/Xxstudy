@@ -15,3 +15,7 @@
 Fork/Join的标准范式如下：
 ![image](https://github.com/myxuxi/gzy/blob/master/forkjoin.png)
 (3)如果中间没有Thread.sleep，那么使用单线程的效率更高，因为多线程使用CPU时的轮询机制，在线程切换间需要进行上下文切换，更加耗时。
+
+3.package tools
+----
+并发工具中的CountDownLawn,可以等待一个线程完全结束后再执行其它线程，加强版的join(),代码内容是先运行启动Spring全家桶的线程，再执行mysql线程，然后是主线程后再执行业务代码，定义CountDownLawn时要初始化count，需要先执行的线程执行后调用latch.countDown(),使count-1，当count=0时才可以执行await(),否则将一直等待。
