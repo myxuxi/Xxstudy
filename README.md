@@ -10,4 +10,4 @@
 (1)MakeArray中定义了一个数组，并赋予每一个元素随机值。<br>
 (2)SumNormal类是一个单线程计算数组元素的累加总值，SumArray类是一个fork_join线程并发工具类，核心思想是分而治之，当问题规模小于一个阈值时可以直接解决，如果不行则把问题规模继续缩小。<br>
 Fork/Join的标准范式如下：<br>
-
+![star](https://github.com/myxuxi/gzy/blob/master/mmexport1535117681423.jpg)
