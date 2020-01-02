@@ -20,3 +20,8 @@ Fork/Join的标准范式如下：
 ----
 (1)并发工具中的CountDownLatch,可以等待一个线程完全结束后再执行其它线程，加强版的join(),代码内容是先运行启动Spring全家桶的线程，再执行mysql线程，然后是主线程后再执行业务代码，定义CountDownLatch时要初始化count，需要先执行的线程执行后调用latch.countDown(),使count-1，当count=0时才可以执行await(),否则将一直等待。<br>
 (2)并发工具中的CyclicBarrier,指的是屏障阻塞了一组线程，需要等待所有的线程到达后才能继续执行，与CountDownLatch的区别是CountDownLatch的放行是由第三者控制的，CyclicBarrier放行是由一组线程本身控制的，前者放行条件>=线程数，后者放行条件=线程数。
+
+4.package Semaphore
+----
+(1)类SqlSession主要实现了数据库Connection方法，DBPoolSemaphore是数据库连接池的实现，包括连接池初始化，从数据库连接池拿资源和归还资源的操作，tips(在执行相应的操作时注意给连接池加锁，因为对应的业务场景是多线程的)。<br>
+(2)在AppTest中模拟业务场景中的使用数据库连接池查询数据库，并做了50个线程的多线程环境，因为有10个连接池资源，所以前10个使用连接池的资源不需要等待，后面的40个则需要等待且等待时间会越来越长，类似阻塞状态，最后使用完并归还连接池资源。
